@@ -4,13 +4,17 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
+import br.com.alura.projeto.category.Category;
+import jakarta.validation.constraints.Pattern;
+
 public class NewCourseForm {
 
     @NotBlank
     private String name;
 
     @NotBlank
-    @Length(min = 4, max = 10)
+    @Pattern(regexp = "^[a-z]+(-[a-z]+)*$", message = "Código deve conter apenas letras minúsculas e hífens")
+    @Length(min = 4, max = 50)
     private String code;
 
     private String description;
@@ -18,6 +22,9 @@ public class NewCourseForm {
     @NotBlank
     @Email
     private String instructorEmail;
+    
+    @NotBlank
+    private String categoryCode;
 
     public NewCourseForm() {}
 
@@ -51,5 +58,17 @@ public class NewCourseForm {
 
     public void setInstructorEmail(String instructorEmail) {
         this.instructorEmail = instructorEmail;
+    }
+    
+    public String getCategoryCode() {
+    	return categoryCode; 
+    }
+    
+    public void setCategoryCode(String categoryCode) {
+    	this.categoryCode = categoryCode;
+    }
+
+    public Course toModel(Category category) {
+        return new Course(name, code, description, instructorEmail, category);
     }
 }
