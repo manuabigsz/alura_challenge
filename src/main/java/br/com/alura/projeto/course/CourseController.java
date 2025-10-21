@@ -63,10 +63,17 @@ public class CourseController {
     }
 
     @PostMapping("/course/{code}/inactive")
+    @Transactional
     public ResponseEntity<?> updateStatus(@PathVariable("code") String courseCode) {
-        // TODO: Implementar a Questão 2 - Inativação de Curso aqui...
+        Course course = courseRepository.findByCode(courseCode)
+                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
 
-        return ResponseEntity.ok().build();
+        course.inactivate();
+
+        courseRepository.save(course);
+
+        return ResponseEntity.ok("Curso inativado com sucesso");
     }
+
 
 }
