@@ -64,16 +64,21 @@ public class CourseController {
 
     @PostMapping("/course/{code}/inactive")
     @Transactional
-    public ResponseEntity<?> updateStatus(@PathVariable("code") String courseCode) {
+    public ResponseEntity<?> inactivateCourse(@PathVariable("code") String courseCode) {
         Course course = courseRepository.findByCode(courseCode)
                 .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
-
         course.inactivate();
-
         courseRepository.save(course);
-
         return ResponseEntity.ok("Curso inativado com sucesso");
     }
 
-
+    @PostMapping("/course/{code}/active")
+    @Transactional
+    public ResponseEntity<?> activateCourse(@PathVariable("code") String courseCode) {
+        Course course = courseRepository.findByCode(courseCode)
+                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
+        course.activate();
+        courseRepository.save(course);
+        return ResponseEntity.ok("Curso ativado com sucesso");
+    }
 }
