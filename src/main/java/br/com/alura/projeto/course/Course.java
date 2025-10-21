@@ -54,6 +54,11 @@ public class Course {
         this.status = Status.INACTIVE;
         this.inactivationDate = LocalDateTime.now();
     }
+    
+    public void activate() {
+        this.status = Status.ACTIVE;
+        this.inactivationDate = null;
+    }
 
     public Long getId() {
         return id;
