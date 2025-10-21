@@ -21,24 +21,31 @@
             <div class="grid">
                <c:forEach var="category" items="${categories}">
                   <div class="card">
-                     <h3 style="color: ${category.color}; font-weight: normal; margin: 0;">
+                     <div style="margin-bottom: 12px; text-align: left;">
+                     <img src="/assets/icons/${category.code}.svg" 
+                           alt="${category.name}" 
+                           style="width: 40px; height: 40px; display: block; margin-bottom: 8px;"
+                           onerror="this.style.display='none'">
+
+                     <h3 style="color: ${category.color}; font-weight: normal; margin: 0; line-height: 1.2;">
                         Escola_<br>
-                        <span style="font-weight: bold; display: inline-block; margin-top: 6px;">${category.name}</span>
+                        <span style="font-weight: bold;">${category.name}</span>
                      </h3>
-                     <p>
-                        <c:set var="courses" value="${coursesByCategory[category.id]}" />
-                        <c:choose>
-                           <c:when test="${not empty courses}">
+                  </div>
+                  <p style="margin: 8px 0 0 0; text-align: left;">
+                     <c:set var="courses" value="${coursesByCategory[category.id]}" />
+                     <c:choose>
+                        <c:when test="${not empty courses}">
                               <c:forEach var="courseName" items="${courses}" varStatus="status">
                                  ${courseName}
                                  <c:if test="${!status.last}">, </c:if>
                               </c:forEach>
-                           </c:when>
-                           <c:otherwise>
+                        </c:when>
+                        <c:otherwise>
                               Cursos em breve
-                           </c:otherwise>
-                        </c:choose>
-                     </p>
+                        </c:otherwise>
+                     </c:choose>
+                  </p>
                   </div>
                </c:forEach>
             </div>
