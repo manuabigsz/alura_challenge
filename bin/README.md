@@ -1,10 +1,6 @@
-# Projeto Alura
+# Teste Alura
 
-Bem-vinda(o) ao teste para **Pessoa Desenvolvedora - Fullstack** da Alura!
-
-Neste desafio, será simulado uma parte do domínio de uma plataforma educacional para que você possa demonstrar seus conhecimentos técnicos.
-
-Não há respostas certas ou erradas, queremos avaliar como você aplica conceitos de lógica e orientação a objetos para resolver problemas.
+Teste Alura
 
 ## Requisitos
 

@@ -22,7 +22,7 @@ Teste Alura
 
 O projeto base já contém a configuração das tecnologias requeridas. Algumas funcionalidades relacionadas à entidade `Category` e `User` estão implementadas e podem servir como guia para a resolução das questões.
 
-### Questão 1 - Cadastro de Cursos
+### Questão 1 - Cadastro de Cursos ✅✅✅
 
 Na Alura, grande parte das funcionalidades gira em torno dos cursos. Sua primeira tarefa é listar e implementar o cadastro de cursos, obedecendo às regras definidas abaixo.
 
