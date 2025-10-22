@@ -72,8 +72,7 @@ Com as categorias e os cursos criados, o próximo passo é fazer com que a pági
 Com a criação das Categorias e Cursos, podemos criar a edição para ambos.
 - Podemos deixar na opção de edição desativar e ativar Cursos.
 
-
-### Questão 5 - Matrícula de Alunos via API
+### Questão 5 - Matrícula de Alunos via API ✅✅✅
 
 Com os cursos criados, o próximo passo é permitir que os alunos se matriculem nos cursos disponíveis.
 
@@ -91,7 +90,15 @@ Com os cursos criados, o próximo passo é permitir que os alunos se matriculem 
 > [!TIP]
 > Já existe um ponto de partida no `RegistrationController`.
 
-### Questão 6 - Relatório de Cursos Mais Acessados via API
+Requisição exemplo para 
+```bash
+curl -X POST http://localhost:8080/registration/new   -H "Content-Type: application/json"   -d '{
+    "courseCode": "dotnet",
+    "studentEmail": "maria.souza@email.com"
+}'
+```
+
+### Questão 6 - Relatório de Cursos Mais Acessados via API ✅✅✅
 
 Agora que temos usuários e matrículas, queremos gerar um relatório para identificar os cursos mais acessados. Implemente a lógica na rota `/registration/report` para listar os cursos com mais matrículas, ordenados pelo número de inscrições.
 
