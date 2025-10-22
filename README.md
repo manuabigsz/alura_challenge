@@ -149,3 +149,7 @@ curl http://localhost:8080/registration/report
 
 > [!TIP]
 > Para uma melhor organização dos commits, considere seguir as [convenções de commits](https://www.conventionalcommits.org/pt-br/v1.0.0/). Isso ajuda a manter um histórico claro e compreensível do projeto.
+>
+-------------------
+
+Os commits deste repositório foram assinados digitalmente com uma GPG key, assegurando a autenticidade e integridade do código. 😊
