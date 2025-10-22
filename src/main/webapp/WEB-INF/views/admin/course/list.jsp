@@ -56,8 +56,7 @@
                                             onchange="toggleCourseStatus('${course.code()}', this.checked)">
                                         <span class="slider"></span>
                                     </label>
-                                    <a class="btn btn-primary btn-sm"
-                                        href="/admin/course/edit/${course.id()}">Editar</a>
+                                    <a class="btn btn-primary btn-sm" href="/admin/course/edit/${course.id()}">Editar</a>
                                 </div>
                             </td>
                         </tr>
