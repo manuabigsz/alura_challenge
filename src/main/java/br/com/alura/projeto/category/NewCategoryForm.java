@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.Length;
 
 public class NewCategoryForm {
 
+	private Long id;
+	
     @NotBlank
     private String name;
 
@@ -19,6 +21,14 @@ public class NewCategoryForm {
     @NotBlank
     private String color;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public Category toModel() {
         return new Category(name, code, color, order);
     }
