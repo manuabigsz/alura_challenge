@@ -84,7 +84,6 @@ public class Course {
         this.instructor = instructor;
     }
 
-
     public Category getCategory() {
         return category;
     }
@@ -99,5 +98,21 @@ public class Course {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

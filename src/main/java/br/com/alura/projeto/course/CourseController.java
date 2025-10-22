@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,10 +18,10 @@ import java.util.List;
 
 @Controller
 public class CourseController {
-	private final CourseRepository courseRepository;
-	private final CategoryRepository categoryRepository;
+    private final CourseRepository courseRepository;
+    private final CategoryRepository categoryRepository;
 
-	public CourseController(CourseRepository courseRepository, CategoryRepository categoryRepository) {
+    public CourseController(CourseRepository courseRepository, CategoryRepository categoryRepository) {
         this.courseRepository = courseRepository;
         this.categoryRepository = categoryRepository;
     }
@@ -39,15 +40,24 @@ public class CourseController {
     @GetMapping("/admin/course/new")
     public String create(NewCourseForm form, Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
-        return "admin/course/newForm";
+        model.addAttribute("isEdit", false);
+        return "admin/course/form";
     }
-    
+
     @Transactional
     @PostMapping("/admin/course/new")
-    public String save(@Valid NewCourseForm form, Model model) {
+    public String save(@Valid NewCourseForm form, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("isEdit", false);
+            return "admin/course/form";
+        }
+
         if (courseRepository.existsByCode(form.getCode())) {
-            model.addAttribute("error", "Código de curso já existe");
-            return create(form, model);
+            result.rejectValue("code", "code.exists", "Código de curso já existe");
+            model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("isEdit", false);
+            return "admin/course/form";
         }
 
         Category category = categoryRepository.findAll()
@@ -57,6 +67,62 @@ public class CourseController {
                 .orElseThrow(() -> new IllegalArgumentException("Categoria inválida"));
 
         Course course = form.toModel(category);
+        courseRepository.save(course);
+
+        return "redirect:/admin/courses";
+    }
+
+    @GetMapping("/admin/course/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        Course course = courseRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
+
+        NewCourseForm form = new NewCourseForm();
+        form.setId(course.getId());
+        form.setName(course.getName());
+        form.setCode(course.getCode());
+        form.setDescription(course.getDescription());
+        form.setInstructorEmail(course.getInstructor());
+        form.setCategoryCode(course.getCategory().getCode());
+
+        model.addAttribute("newCourseForm", form);
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("isEdit", true);
+
+        return "admin/course/form";
+    }
+
+    @Transactional
+    @PostMapping("/admin/course/edit/{id}")
+    public String update(@PathVariable Long id, @Valid NewCourseForm form, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("isEdit", true);
+            return "admin/course/form";
+        }
+
+        Course course = courseRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
+
+        if (courseRepository.existsByCodeAndIdNot(form.getCode(), id)) {
+            result.rejectValue("code", "code.exists", "Código de curso já existe");
+            model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("isEdit", true);
+            return "admin/course/form";
+        }
+
+        Category category = categoryRepository.findAll()
+                .stream()
+                .filter(c -> c.getCode().equals(form.getCategoryCode()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Categoria inválida"));
+
+        course.setName(form.getName());
+        course.setCode(form.getCode());
+        course.setDescription(form.getDescription());
+        course.setInstructor(form.getInstructorEmail());
+        course.setCategory(category);
+
         courseRepository.save(course);
 
         return "redirect:/admin/courses";

@@ -9,6 +9,8 @@ import jakarta.validation.constraints.Pattern;
 
 public class NewCourseForm {
 
+	private Long id;
+	 
     @NotBlank
     private String name;
 
@@ -70,5 +72,13 @@ public class NewCourseForm {
 
     public Course toModel(Category category) {
         return new Course(name, code, description, instructorEmail, category);
+    }
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
