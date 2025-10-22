@@ -45,7 +45,7 @@ Na Alura, grande parte das funcionalidades gira em torno dos cursos. Sua primeir
 > [!TIP]
 > Há um ponto de partida no `CourseController` com a rota `admin/course/new`.
 
-### Questão 2 - Inativação de Cursos
+### Questão 2 - Inativação de Cursos ✅✅✅
 
 Cursos podem ser inativados por diversos motivos, como atualizações ou descontinuação. Você será responsável por implementar essa funcionalidade, seguindo as regras a seguir.
 
@@ -55,7 +55,7 @@ Cursos podem ser inativados por diversos motivos, como atualizações ou descont
 - Ao inativar, o campo "status" deve ser alterado para `INACTIVE` e o campo "data de inativação" deve ser registrado com a data e hora atuais.
 
 
-### Questão 3 - Front-end página de Login
+### Questão 3 - Front-end página de Login ✅✅✅
 
 Com as categorias e os cursos criados, o próximo passo é fazer com que a página de login receba essas informações dinâmica e a estilização de acordo com o Figma disponibilizado.
 
@@ -67,7 +67,7 @@ Com as categorias e os cursos criados, o próximo passo é fazer com que a pági
 
 ### Bônus (não obrigatório para as questões 4, 5, 6)
 
-### Questão 4 - Edição de Categorias e Cursos
+### Questão 4 - Edição de Categorias e Cursos ✅✅✅
 
 Com a criação das Categorias e Cursos, podemos criar a edição para ambos.
 - Podemos deixar na opção de edição desativar e ativar Cursos.
