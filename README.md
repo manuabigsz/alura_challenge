@@ -45,6 +45,11 @@ Na Alura, grande parte das funcionalidades gira em torno dos cursos. Sua primeir
 > [!TIP]
 > Há um ponto de partida no `CourseController` com a rota `admin/course/new`.
 
+# O que foi feito:
+- Criada entidade Course e demais
+- Refatoração da rota para retornar cursos
+- Criado frontend para listar e cadastrar cursos
+
 ### Questão 2 - Inativação de Cursos ✅✅✅
 
 Cursos podem ser inativados por diversos motivos, como atualizações ou descontinuação. Você será responsável por implementar essa funcionalidade, seguindo as regras a seguir.
@@ -54,6 +59,9 @@ Cursos podem ser inativados por diversos motivos, como atualizações ou descont
 - Acesse a rota `/course/{code}/inactive` para inativar o curso com o código fornecido.
 - Ao inativar, o campo "status" deve ser alterado para `INACTIVE` e o campo "data de inativação" deve ser registrado com a data e hora atuais.
 
+# O que foi feito:
+- Métodos para ativar e inativar cursos
+- Ajuste lista de cursos - switch para ação
 
 ### Questão 3 - Front-end página de Login ✅✅✅
 
@@ -64,6 +72,10 @@ Com as categorias e os cursos criados, o próximo passo é fazer com que a pági
 > [!TIP]
 > Já existe um ponto de partida no `LoginController`.
 
+# O que foi feito:
+- Seeders para Cursos e Categorias, afim de facilitar o desenvolvimento
+- Refatoração do LoginCotroller para "puxar" os dados, trazendo apenas cursos ativos
+- Ajuste no frontend para exibir essas categorias e cursos de acordo com seus atributos, como cor.
 
 ### Bônus (não obrigatório para as questões 4, 5, 6)
 
@@ -71,6 +83,11 @@ Com as categorias e os cursos criados, o próximo passo é fazer com que a pági
 
 Com a criação das Categorias e Cursos, podemos criar a edição para ambos.
 - Podemos deixar na opção de edição desativar e ativar Cursos.
+
+# O que foi feito:
+- Ajuste nos setters das Entidades.
+- Refatoração no controller, no create, e adição da rota de edição
+- Alteração do newForm, para tornar-se um único formulário que possibilite edição/cadastro de novos cursos/categorias
 
 ### Questão 5 - Matrícula de Alunos via API ✅✅✅
 
@@ -90,7 +107,15 @@ Com os cursos criados, o próximo passo é permitir que os alunos se matriculem 
 > [!TIP]
 > Já existe um ponto de partida no `RegistrationController`.
 
-Requisição exemplo para 
+# O que foi feito:
+- Criada entidade Registration (matrícula)
+- Implementado lógica para o endpoint POST /registration/new
+- Validações implementadas:
+    - Usuário deve existir e ser estudante
+    - Curso deve existir e estar ativo
+    - Não permite matrícula duplicada
+
+Requisição exemplo para a rota:
 ```bash
 curl -X POST http://localhost:8080/registration/new   -H "Content-Type: application/json"   -d '{
     "courseCode": "dotnet",
@@ -104,6 +129,15 @@ Agora que temos usuários e matrículas, queremos gerar um relatório para ident
 
 > [!IMPORTANT]
 > A Alura possui um grande volume de dados. Portanto, priorize o uso de SQL nativo na construção do relatório e evite o [anti-pattern N+1](https://semantix.ai/o-que-e-o-problema-n1/).
+
+# O que foi feito:
+- Implementado endpoint GET /registration/report
+- Query SQL nativa otimizada (evita problema N+1)
+- Retorna cursos ordenados por número de matrículas
+Requisição exemplo para a rota:
+```bash
+curl http://localhost:8080/registration/report
+```
 
 ## Considerações Finais
 
